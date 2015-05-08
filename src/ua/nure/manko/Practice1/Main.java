@@ -12,18 +12,20 @@ public class Main {
         Pattern number = Pattern.compile(".*\\d.*");
         Pattern lowCase = Pattern.compile(".*[a-z].*");
         Pattern upperCase = Pattern.compile(".*[A-Z].*");
+        Pattern notCharOrNumber = Pattern.compile(".*\\W.*"); // \W mean [^a-zA-Z0-9]
 
         Matcher n = number.matcher(testString);
         Matcher l = lowCase.matcher(testString);
         Matcher u = upperCase.matcher(testString);
+        Matcher ncn = notCharOrNumber.matcher(testString);
 
         boolean len = testString.length() >= 8;
 
-        return len && n.matches() && l.matches() && u.matches();
+        return len && !ncn.matches() && n.matches() && l.matches() && u.matches();
     }
 
     public static void main(String[] args) {
-        System.out.println(validator("oddS4dddSasd"));
+        System.out.println(validator("oddS14dddSasd"));
 
     }
 }
